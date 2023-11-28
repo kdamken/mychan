@@ -3,6 +3,10 @@ const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
+exports.sign_up_form_get = function(req, res, next){
+  res.render("sign-up-form", { title: 'Sign Up', user: req.user });
+}
+
 exports.sign_up_form_post = [
   // body("first_name", "First name must not be empty.")
   //   .trim()

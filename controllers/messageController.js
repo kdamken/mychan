@@ -3,6 +3,11 @@ const Message = require("../models/message");
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
+exports.new_message_get = function(req, res, next) {
+  console.log('xyz new_message_get req.user', req.user)
+  res.render("new-post", { title: 'New Post', user: req.user });
+}
+
 exports.new_message_post = [
   body("message", "Message must not be empty and be at least 3 characters")
     .trim()
@@ -11,7 +16,7 @@ exports.new_message_post = [
   body("user", "Need a user to post")
     .trim()
     .isLength({ min: 1 })
-    .escape(),  
+    .escape(),
   asyncHandler(async (req, res, next) => {
     console.log('xyz trying to post message');
     // Extract the validation errors from a request.
@@ -50,7 +55,7 @@ exports.new_message_post = [
       // });
     } else {
       console.log('xyz no errors, trying to save');
-      
+
       // Data from form is valid. Save book.
       await message.save();
       res.redirect('/');

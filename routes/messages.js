@@ -1,11 +1,10 @@
-// var express = require('express');
-// var router = express.Router();
+var express = require('express');
+var router = express.Router();
 
-// const message_controller = require("../controllers/messageController");
+const message_controller = require("../controllers/messageController");
 
-// router.get('/new-post', function(req, res, next) {
-//   console.log('xyz req.user', req.user)
-//   res.render("new-post", { title: 'New Post', user: req.user });
-// });
+router.get('/new-post', message_controller.new_message_get);
 
-// router.post("/new-post", message_controller.new_message_post);
+router.post("/new-post", message_controller.new_message_post);
+
+module.exports = router;

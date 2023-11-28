@@ -16,26 +16,22 @@ router.get('/about', function(req, res, next) {
   res.render("about", { title: 'About', user: req.user });
 });
 
-router.get('/become-a-member', user_controller.become_a_member_get);
+// router.get('/new-post', function(req, res, next) {
+//   console.log('xyz req.user', req.user)
+//   res.render("new-post", { title: 'New Post', user: req.user });
+// });
 
-router.post('/become-a-member', user_controller.become_a_member_post);
+// router.post("/new-post", message_controller.new_message_post);
 
-router.get('/new-post', function(req, res, next) {
-  console.log('xyz req.user', req.user)
-  res.render("new-post", { title: 'New Post', user: req.user });
-});
+// router.get('/sign-up', function(req, res, next) {
+//   res.render("sign-up-form", { title: 'Sign Up', user: req.user });
+// });
 
-router.post("/new-post", message_controller.new_message_post);
+// router.post("/sign-up", user_controller.sign_up_form_post);
 
-router.get('/sign-up', function(req, res, next) {
-  res.render("sign-up-form", { title: 'Sign Up', user: req.user });
-});
-
-router.post("/sign-up", user_controller.sign_up_form_post);
-
-router.post('/new-post', function(req, res, next) {
-  res.render("new-post", { title: 'New Post', user: req.user });
-});
+// router.post('/new-post', function(req, res, next) {
+//   res.render("new-post", { title: 'New Post', user: req.user });
+// });
 
 router.post("/log-in",
   passport.authenticate("local", {

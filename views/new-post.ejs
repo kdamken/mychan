@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+<body>
+  <div>
+    <%- include('./partials/nav'); %>
+  </div>
+  <div>
+    <h1>Sign Up</h1>
+    <% if (user) {%>    
+      <p><%= user %></p>
+      <form action="" method="POST">
+        <!-- <label for="first_name">First Name</label>
+        <br>
+        <input name="first_name" type="text" />
+        <br><br>
+        <label for="first_name">Last Name</label>
+        <br>
+        <input name="last_name" type="text" />
+        <br><br> -->
+        <label for="message">Message</label>
+        <br>
+        <textarea name="message" rows="8" cols="50"></textarea>
+        <br><br>
+        <input name="user" type="hidden" value="<%= user._id %>">
+        <!-- <label for="email">Email</label>
+        <br>
+        <input name="email" type="text" />
+        <br><br> -->
+        <!-- <label for="confirm-password">Confirm Password</label>
+        <br>
+        <input name="confirm-password" type="password" />
+        <br><br> -->
+        <button>Save</button>
+      </form>  
+    <% } else {%>
+      <p>This page is for users only, <a href="/sign-up">go here to sign up</a>, or <a href="/">go here to log in</a>.</p>      
+    <% } %>    
+  </div>  
+</body>
+</html>

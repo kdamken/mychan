@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div>
+      <%- include('./partials/nav'); %>
+    </div>
+    <div>
+      <h1><%= title %></h1>
+      <p>Welcome to <%= title %></p>
+      <% if (user) {%>
+        <h1>WELCOME BACK <%= user.username %></h1>
+        <ul>
+          <% if (user.member) {%>
+            <li><a href="/new-post">New Post</a><br></li>
+          <% } else {%>
+            <li><a href="/become-a-member">Become a member</a><br></li>
+          <% } %>
+          <li><a href="/log-out">Log Out</a></li>
+        </ul>
+      <% } else { %>
+        <h1>please <a href="/log-in">log in</a> or <a href="/sign-up">Sign Up</a></h1>
+        <%- include('./partials/log-in-form', {errors: errors}); %>
+      <%}%>
+    </div>
+    <div>
+      <h2>Messages</h2>
+      <% messages.forEach(function(post){ %>
+        <div>
+          <p><span>Message:</span><br><br><%= post.message %></p>
+          <% if (user) {%>
+            <p>Date:<br><br><%= post.date_formatted %></p>
+            <p>Written By: <%= post.user.username %></p>
+          <% } %>
+        </div>
+        <hr>
+      <% }); %>
+    </div>
+  </body>
+</html>

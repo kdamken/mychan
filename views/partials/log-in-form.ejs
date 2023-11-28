@@ -1,0 +1,18 @@
+<form action="/log-in" method="POST">
+  <label for="username">Username</label>
+  <input name="username" placeholder="username" type="text" />
+  <label for="password">Password</label>
+  <input name="password" type="password" />
+  <button>Log In</button>
+</form>
+
+<% if (errors && Array.isArray(errors) && errors.length > 0) { %>
+  <div>
+    <h2>Errors:</h2>
+    <ul>
+      <% errors.forEach(function(error){ %>
+        <li><%= error.msg %></p>
+      <% }); %>
+    </ul>
+  </div>
+<% } %>

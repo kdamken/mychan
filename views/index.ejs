@@ -30,8 +30,8 @@
       <h2>Messages</h2>
       <% messages.forEach(function(post){ %>
         <div>
-          <p><span>Message:</span><br><br><%= post.message %></p>
-          <% if (user) {%>
+          <p><span>Message:</span><br><br><%- post.message %></p>
+          <% if (user && user.member) {%>
             <p>Date:<br><br><%= post.date_formatted %></p>
             <p>Written By: <%= post.user.username %></p>
           <% } %>

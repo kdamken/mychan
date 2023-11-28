@@ -109,7 +109,7 @@ exports.sign_up_form_post = [
 exports.become_a_member_get = asyncHandler(async (req, res, next) => {
   if (req.user) {
     console.log('xyz req.user', req.user)
-    res.render("become-a-member", { title: 'Become a Member', user: req.user });
+    res.render("become-a-member", { title: 'Become a Member', user: req.user, errors: null });
   } else {
     res.redirect("/");
   }
@@ -152,7 +152,7 @@ exports.become_a_member_post = [
       //   }
       // }
 
-      res.render("/become-a-member", { title: 'Become a Member', user: req.user });
+      res.render("become-a-member", { title: 'Become a Member', user: req.user, errors: errors.array() });
       // res.render("book_form", {
       //   title: "Create Book",
       //   authors: allAuthors,

@@ -10,7 +10,7 @@ exports.home_get = asyncHandler(async (req, res, next) => {
     .populate("user")
     .exec();
 
-  // console.log('xyz messages', messages);
+  console.log('xyz messages', messages);
   res.render("index", { title: 'myChan', user: req.user, messages: messages, errors: null });
 })
 

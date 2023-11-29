@@ -1,11 +1,10 @@
 const Message = require("../models/message");
-// const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
 exports.new_message_get = function(req, res, next) {
   console.log('xyz new_message_get req.user', req.user)
-  res.render("new-post", { title: 'New Post', user: req.user });
+  res.render("new-post", { title: 'New Post', user: req.user, errors: null });
 }
 
 exports.new_message_post = [
@@ -63,10 +62,28 @@ exports.new_message_post = [
   })
 ];
 
-exports.message_detail = asyncHandler(async (req, res, next) => {
+exports.message_detail_get = asyncHandler(async (req, res, next) => {
   console.log('xyz trying to view message detail')
   const message = await Message.findById(req.params.id).populate('user').exec();
   console.log('xyz message', message);
 
   res.render("message-detail", { title: 'Message Detail', user: req.user, message: message });
+});
+
+exports.message_delete_get = asyncHandler(async (req, res, next) => {
+  console.log('xyz trying to view message delete')
+  const message = await Message.findById(req.params.id).populate('user').exec();
+  console.log('xyz message', message);
+
+  res.render("message-delete", { title: 'Delete Message', user: req.user, message: message });
+});
+
+exports.message_delete_post = asyncHandler(async (req, res, next) => {
+  // console.log('xyz trying to view message delete')
+  // const message = await Message.findById(req.params.id).populate('user').exec();
+  // console.log('xyz message', message);
+
+  console.log('xyz trying to delete messageid', req.body.messageid)
+  await Message.findByIdAndDelete(req.body.messageid);
+  res.redirect("/");
 });

@@ -4,7 +4,7 @@ const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
 exports.sign_up_form_get = function(req, res, next){
-  res.render("sign-up-form", { title: 'Sign Up', user: req.user });
+  res.render("sign-up-form", { title: 'Sign Up', user: req.user, errors: null });
 }
 
 exports.sign_up_form_post = [
@@ -16,7 +16,7 @@ exports.sign_up_form_post = [
   //   .trim()
   //   .isLength({ min: 1 })
   //   .escape(),
-  body("username", "Summary must not be empty and be at least 3 characters")
+  body("username", "Username must not be empty and be at least 3 characters")
     .trim()
     .isLength({ min: 3 })
     .escape(),
@@ -28,14 +28,13 @@ exports.sign_up_form_post = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
+  body('passwordConfirmation').custom((value, { req }) => {
+    return (value !== '') && value === req.body.password
+  }).withMessage('Please ensure the password confirmation matches the password entered.'),
   body("member", "Must have value")
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  // body("password_confirmation", "Password confirmation must not be empty")
-  //   .trim()
-  //   .isLength({ min: 1 })
-  //   .escape(),
   asyncHandler(async (req, res, next) => {
     console.log('xyz trying to sign up post');
     // Extract the validation errors from a request.
@@ -73,11 +72,11 @@ exports.sign_up_form_post = [
       //   book: book,
       //   errors: errors.array(),
       // });
-      // res.render("sign-up", {
-      //   title: "myChan",
-      //   user: req.user,
-      //   errors: errors.array(),
-      // });
+      res.render("sign-up-form", {
+        title: "Sign Up",
+        user: req.user,
+        errors: errors.array(),
+      });
     } else {
       console.log('xyz no errors, trying to save');
 

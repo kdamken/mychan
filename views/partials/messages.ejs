@@ -2,7 +2,7 @@
   <h2>Messages</h2>
   <% messages.forEach(function(message){ %>
     <div>
-      <p><a href="/message/<%- message._id %>">Message:</a><br><br><%- message.message %></p>
+      <p><a href="<%- message.url %>">Message:</a><br><br><%- message.message %></p>
       <% if (user && user.member) {%>
         <p>Date:<br><br><%= message.date_formatted %></p>
         <p>Written By: <%= message.user.username %></p>

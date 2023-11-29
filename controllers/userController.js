@@ -31,10 +31,6 @@ exports.sign_up_form_post = [
   body('passwordConfirmation').custom((value, { req }) => {
     return (value !== '') && value === req.body.password
   }).withMessage('Please ensure the password confirmation matches the password entered.'),
-  body("member", "Must have value")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
   asyncHandler(async (req, res, next) => {
     console.log('xyz trying to sign up post');
     // Extract the validation errors from a request.

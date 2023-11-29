@@ -169,3 +169,67 @@ exports.become_a_member_post = [
     }
   })
 ]
+
+exports.become_an_admin_get = asyncHandler(async (req, res, next) => {
+  if (req.user) {
+    console.log('xyz req.user', req.user)
+    res.render("become-an-admin", { title: 'Become an Admin', user: req.user, errors: null });
+  } else {
+    res.redirect("/");
+  }
+});
+
+exports.become_an_admin_post = [
+  body("passcode", "Passcode needs to be entered and correct")
+    .trim()
+    .equals('tobi')
+    .escape(),
+  asyncHandler(async (req, res, next) => {
+    console.log('xyz trying to post message');
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+    console.log('xyz req.user', req.user)
+
+    // Create a user object with escaped and trimmed data.
+    const user = new User({
+      user: req.user.password,
+      password: req.user.password,
+      member: true,
+      admin: true,
+      _id: req.user._id
+    });
+
+    if (!errors.isEmpty()) {
+      console.log('xyz there are errors', errors);
+      // There are errors. Render form again with sanitized values/error messages.
+
+      // // Get all authors and genres for form.
+      // const [allAuthors, allGenres] = await Promise.all([
+      //   Author.find().exec(),
+      //   Genre.find().exec(),
+      // ]);
+
+      // // Mark our selected genres as checked.
+      // for (const genre of allGenres) {
+      //   if (book.genre.includes(genre._id)) {
+      //     genre.checked = "true";
+      //   }
+      // }
+
+      res.render("become-an-admin", { title: 'Become an Admin', user: req.user, errors: errors.array() });
+      // res.render("book_form", {
+      //   title: "Create Book",
+      //   authors: allAuthors,
+      //   genres: allGenres,
+      //   book: book,
+      //   errors: errors.array(),
+      // });
+    } else {
+      console.log('xyz no errors, trying to save');
+
+      // Data from form is valid. Save book.
+      await User.findByIdAndUpdate(req.user._id, user, {});
+      res.redirect('/');
+    }
+  })
+]

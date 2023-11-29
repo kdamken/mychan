@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include('./partials/nav'); %>
+    <div class="main-content">
+      <h1><%= title %></h1>
+      <%- include('./partials/message'); %>
+      <% if (user && user.admin) { %>
+        <p><a href="/<%- message.url %>/delete">Delete Message</a></p>
+      <% } %>
+    </div>
+  </body>
+</html>

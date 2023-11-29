@@ -1,11 +1,28 @@
-<ul>
-  <li><a href="/">Home</a></li>
-  <li><a href="/about">About</a></li>
-  <% if (user) {%>
-    <li><a href="/new-post">New post</a></li>    
-    <li><a href="/log-out">Log Out</a></li>    
-  <% } else {%>
-    <li><a href="/log-in">Log In</a></li>
-    <li><a href="/sign-up">Sign Up</a></li>  
+<div class="side-nav">
+  <h2>User: <%= user ? user.username : 'Anonymous' %></h2>
+  <% if (user) { %>
+    <h2>Member: <%= user.member ? "Yes" : "No" %> </h2>
+    <h2>Admin: <%= user.admin ? "Yes" : "No" %></h2>
   <% } %>
-</ul>
+  <hr>
+
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <% if (user) {%>
+      <% if (user.member) {%>
+        <li><a href="/new-post">New post</a></li>
+      <% } else { %>
+        <li><a href="/become-a-member">Become a member</a></li>
+      <% } %>
+      <% if (!user.admin) {%>
+        <li><a href="/become-an-admin">Become an admin</a></li>
+      <% } %>
+      <li><a href="/log-out">Log Out</a></li>
+    <% } else {%>
+      <li><a href="/log-in">Log In</a></li>
+      <li><a href="/sign-up">Sign Up</a></li>
+    <% } %>
+  </ul>
+  <hr>
+</div>

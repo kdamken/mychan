@@ -7,4 +7,8 @@ router.get('/new-post', message_controller.new_message_get);
 
 router.post("/new-post", message_controller.new_message_post);
 
+// router.post("/delete-post", message_controller.new_message_post);
+
+router.get("/message/:id", message_controller.message_detail);
+
 module.exports = router;

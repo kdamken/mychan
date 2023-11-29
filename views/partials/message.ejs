@@ -1,0 +1,8 @@
+<div>
+  <p><span>Message:</span><br><br><%- message.message %></p>
+  <% if (user && user.member) {%>
+    <p>Date:<br><br><%= message.date_formatted %></p>
+    <p>Written By: <%= message.user.username %></p>
+  <% } %>
+</div>
+<hr>

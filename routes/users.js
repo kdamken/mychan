@@ -12,6 +12,9 @@ router.post("/sign-up", user_controller.sign_up_form_post);
 router.get('/become-a-member', user_controller.become_a_member_get);
 router.post('/become-a-member', user_controller.become_a_member_post);
 
+router.get('/become-an-admin', user_controller.become_an_admin_get);
+router.post('/become-an-admin', user_controller.become_an_admin_post);
+
 // These three are used when passport actually runs
 passport.use(
   new LocalStrategy(async (username, password, done) => {
@@ -47,8 +50,6 @@ passport.deserializeUser(async (id, done) => {
     done(err);
   };
 });
-
-
 
 router.post("/log-in",
   passport.authenticate("local", {

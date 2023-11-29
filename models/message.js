@@ -11,7 +11,7 @@ const MessageSchema = new Schema({
 // Virtual for category's URL
 MessageSchema.virtual("url").get(function () {
   // We don't use an arrow function as we'll need the this object
-  return `/user/${this._id}`;
+  return `/message/${this._id}`;
 });
 
 MessageSchema.virtual("date_formatted").get(function () {

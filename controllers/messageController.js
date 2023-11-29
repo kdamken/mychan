@@ -62,3 +62,11 @@ exports.new_message_post = [
     }
   })
 ];
+
+exports.message_detail = asyncHandler(async (req, res, next) => {
+  console.log('xyz trying to view message detail')
+  const message = await Message.findById(req.params.id).populate('user').exec();
+  console.log('xyz message', message);
+
+  res.render("message-detail", { title: 'Message Detail', user: req.user, message: message });
+});

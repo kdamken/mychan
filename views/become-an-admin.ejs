@@ -9,10 +9,10 @@
   <div class="main-content">
     <h1><%= title %></h1>
     <% if (user) { %>
-      <% if (user.member) { %>
-        <p>You're already a member, go <a href="/new-post">submit a post</a>.</p>
+      <% if (user.admin) { %>
+        <p>You're already an admin, go <a href="/">here to view posts</a>.</p>
       <% } else { %>
-        <form action="/become-a-member" method="POST">
+        <form action="/become-an-admin" method="POST">
           <label for="passcode">Secret Passcode: </label>
           <input name="passcode" placeholder="username" type="text" />
           <button>Submit</button>

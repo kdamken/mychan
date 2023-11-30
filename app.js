@@ -9,10 +9,13 @@ var cookieParser = require('cookie-parser');
 var lessMiddleware = require('less-middleware');
 var logger = require('morgan');
 
-const mongoDbString = process.env.MONGODB_CONNECTION_STRING;
-mongoose.connect(mongoDbString);
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "mongo connection error"));
+const mongoDbString = process.env.MONGODB_CONNECTION_STRING || '';
+console.log('xyz mongoDbString: ', mongoDbString);
+if (mongoDbString) {
+  mongoose.connect(mongoDbString);
+  const db = mongoose.connection;
+  db.on("error", console.error.bind(console, "mongo connection error"));
+}
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
